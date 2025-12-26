@@ -5,15 +5,15 @@ services:
     image: postgres
     container_name: mmadwn-sso-postgres
     environment:
-      POSTGRES_DB: mmadwn-sso
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - mmadwn-sso_postgres_data:/var/lib/postgresql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U mmadwn-sso"]
       interval: 10s
       timeout: 5s
       retries: 5
